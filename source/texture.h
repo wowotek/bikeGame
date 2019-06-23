@@ -27,9 +27,9 @@ Texture*
 make_texture (Image, Sampler);
 
 void
-bind_texture (const Texture *const, u32 index);
+bind_texture (Texture*, u32 index);
 
 void
-destroy_texture (Texture *const);
+destroy_texture (Texture*);
 
 #endif // TEXTURE_H

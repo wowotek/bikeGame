@@ -5,11 +5,11 @@
 
 typedef u32 ImageFormat;
 
-extern ImageFormat
-    IMAGE_FORMAT_R8,
-    IMAGE_FORMAT_R8G8,
-    IMAGE_FORMAT_R8G8B8,
-    IMAGE_FORMAT_R8G8B8A8;
+extern
+ImageFormat IMAGE_FORMAT_RED,
+            IMAGE_FORMAT_RG,
+            IMAGE_FORMAT_RGB,
+            IMAGE_FORMAT_RGBA;
 
 typedef struct
 {

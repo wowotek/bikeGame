@@ -75,6 +75,8 @@ int main(void)
 {
     glfwInit();
 
+    printf("%s\n", glfwGetVersionString());
+
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -84,6 +86,8 @@ int main(void)
     glfwMakeContextCurrent(pWindow);
 
     gladLoadGL();
+
+    printf("%s\n", glGetString(GL_VERSION));
 
     Image wheelImage = image_from_file("../data/images/wheel.png");
 
@@ -101,7 +105,7 @@ int main(void)
 
     Texture* wheelTexture = make_texture(wheelImage, defaultSampler);
 
-
+    printf("%p\n", wheelTexture);
 
     while (!glfwWindowShouldClose(pWindow))
     {
@@ -109,6 +113,8 @@ int main(void)
 
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
+        bind_texture(wheelTexture, 1);
 
         glfwSwapBuffers(pWindow);
     }

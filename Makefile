@@ -1,7 +1,7 @@
 
 SOURCE_FOLDER := ./source
 
-CFLAGS = -std=c11 -I./submodules/glm -I./submodules/stb -I./submodules/glad/include -I$(SOURCE_FOLDER)
+CFLAGS = -std=c11 -O0 -I./submodules/glm -I./submodules/stb -I./submodules/glad/include -I$(SOURCE_FOLDER)
 LDFLAGS = -lGL -lGLU -lglfw -lm -ldl
 CC = gcc
 
@@ -24,7 +24,7 @@ clean:;
 	@rm -r $(BUILD_FOLDER)
 
 all: $(OBJ_FOLDER) $(EXE)
-	@cp -r data/ build/data/
+	@cp -r data/ build/
 
 $(EXE): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
