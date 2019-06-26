@@ -24,7 +24,7 @@ typedef struct
 typedef struct Texture Texture;
 
 Texture*
-make_texture (Image, Sampler);
+new_texture (Image, Sampler);
 
 void
 bind_texture (Texture*, u32 index);

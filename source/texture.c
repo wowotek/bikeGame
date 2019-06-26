@@ -1,4 +1,4 @@
-#include <texture.h>
+#include "texture.h"
 
 #include <glad/glad.h>
 
@@ -16,7 +16,7 @@ struct Texture
 };
 
 Texture*
-make_texture (Image image, Sampler sampler)
+new_texture (Image image, Sampler sampler)
 {
     Texture *this = calloc(1, sizeof(Texture));
 

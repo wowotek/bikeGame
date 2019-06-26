@@ -21,10 +21,10 @@ image_from_file (const char* path)
     
     switch (comp)
     {
-        case 1: image.format = IMAGE_FORMAT_RED; break;
-        case 2: image.format = IMAGE_FORMAT_RG; break;
-        case 3: image.format = IMAGE_FORMAT_RGB; break;
-        case 4: image.format = IMAGE_FORMAT_RGBA; break;
+        case STBI_grey: image.format = IMAGE_FORMAT_RED; break;
+        case STBI_grey_alpha: image.format = IMAGE_FORMAT_RG; break;
+        case STBI_rgb: image.format = IMAGE_FORMAT_RGB; break;
+        case STBI_rgb_alpha: image.format = IMAGE_FORMAT_RGBA; break;
     }
     
     return image;
