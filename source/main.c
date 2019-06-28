@@ -1,6 +1,8 @@
-#include <common.h>
-#include <image.h>
-#include <texture.h>
+#include "common.h"
+#include "image.h"
+#include "texture.h"
+#include "shader.h"
+#include "mesh.h"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -10,13 +12,39 @@
 #define GLM_FORCE_INLINE
 #include <glm/glm.h>
 
-
-#define WIDTH 800
-#define HEIGHT 600
+#define WIDTH 500
+#define HEIGHT 500
 
 #define ARRAY_SIZE(x) (sizeof(x)/sizeof((x)[0]))
 
-typedef struct { vec2 x, v, a; } Motion;
+typedef struct { vec2 x, v, a; } Motion2D;
+
+typedef struct
+{
+    vec2 scale;
+    vec2 position;
+    float angle;
+} Transform2D;
+
+typedef struct
+{
+    Texture2D* pTexture;
+} Sprite;
+
+typedef struct
+{
+    Transform2D transform;
+    Motion2D motion;
+    u8 spriteID;
+} Entity;
+
+typedef struct
+{
+    Transform2D transform;
+    float aspect;
+    float zoom;
+} Camera2D;
+
 
 #define MOTION_DEFAULT (Motion){vec2(0), vec2(0), vec2(0)}
 
@@ -28,46 +56,21 @@ integrate_modified_euler (float dt, vec2* x, vec2* v, vec2* a)
 }
 
 static inline void
-motion_add_force (Motion *const this, const vec2 f)
+motion_add_force (Motion2D *const this, const vec2 f)
 {
     this->a = add(this->a, f);
 }
 
 static inline void
-motion_update (Motion *const this, float dt)
+motion_update (Motion2D *const this, float dt)
 {
     integrate_modified_euler(dt, &this->x, &this->v, &this->a);
     this->a = vec2(0);
 }
 
-struct Camera
-{
-	Motion motion;
-	float aspect, zoom;
-};
-
-struct Sprite
-{
-};
-
-struct Entity
-{
-    Motion motion;
-    uint8_t spriteID;
-};
-
 
 #define MAX_ENTITY_COUNT 1024
-static struct Entity entities[MAX_ENTITY_COUNT];
-
-static void
-update (float dt)
-{
-
-}
-
-#include "shader.h"
-#include "mesh.h"
+static Entity entities[MAX_ENTITY_COUNT];
 
 int main(void)
 {
@@ -91,6 +94,8 @@ int main(void)
     glViewport(0, 0, WIDTH, HEIGHT);
     glEnable(GL_TEXTURE_2D);
     glFrontFace(GL_CW);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     const char* pVertexStageCode = ReadTextFile("../data/shaders/texturedQuad.vert");
     const char* pPixelStageCode = ReadTextFile("../data/shaders/texturedQuad.frag");
@@ -121,25 +126,15 @@ int main(void)
 
     Mesh_t* pQuadMesh = New_Mesh(pTexturedQuadShader, pQuadVertices, 4, pQuadIndices, 6);
 
-/*
-    Image wheelImage = image_from_file("../data/images/wheel.png");
-
-    printf("path: %s\n", wheelImage.path);
-    printf("resolution: %ux%u\n", wheelImage.width, wheelImage.height);
-    printf("format: %u\n", wheelImage.format);
-    printf("pixels: %p\n", wheelImage.pixels);
+    Image policeCarImage = Image_From_File("../data/images/Police.png");
 
     Sampler defaultSampler;
-
     defaultSampler.wrapS = CLAMP_TO_EDGE;
     defaultSampler.wrapT = CLAMP_TO_EDGE;
     defaultSampler.filterMin = NEAREST;
     defaultSampler.filterMag = NEAREST;
 
-    Texture* wheelTexture = new_texture(wheelImage, defaultSampler);
-
-    printf("%p\n", wheelTexture);
-*/
+    Texture2D* pPoliceCarTexture = New_Texture(policeCarImage, defaultSampler);
 
     while (!glfwWindowShouldClose(pWindow))
     {
@@ -148,6 +143,10 @@ int main(void)
         glClear(GL_COLOR_BUFFER_BIT);
 
         Shader_Bind(pTexturedQuadShader);
+
+        BindTexture2D(pPoliceCarTexture, 0);
+        SetSampler2D(pTexturedQuadShader, "iColorTexture", 0);
+
         Mesh_Draw(pQuadMesh);
 
         glfwSwapBuffers(pWindow);

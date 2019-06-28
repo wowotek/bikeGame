@@ -121,13 +121,17 @@ Shader_Bind (Shader_t* pShader)
     glUseProgram(pShader->id);
 }
 
-
-int Shader_GetAttribLocation (Shader_t* pShader, const char* pAttribName)
+int GetAttribLocation (Shader_t* this, const char* pAttribName)
 {
-    return glGetAttribLocation(pShader->id, pAttribName);
+    return glGetAttribLocation(this->id, pAttribName);
 }
 
-int Shader_GetUniformLocation (Shader_t* pShader, const char* pUniformName)
+int GetUniformLocation (Shader_t* this, const char* pUniformName)
 {
-    return glGetUniformLocation(pShader->id, pUniformName);
+    return glGetUniformLocation(this->id, pUniformName);
+}
+
+void SetSampler2D (const Shader_t* this, const char* name, i32 value)
+{
+    glUniform1i(GetUniformLocation(this, name), value);
 }

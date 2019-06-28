@@ -30,8 +30,9 @@ New_Shader_Default (ShaderStage_t* pVertexStage, ShaderStage_t* pPixelStage);
 void
 Shader_Bind (Shader_t* pShader);
 
-int Shader_GetAttribLocation (Shader_t* pShader, const char* pAttribName);
-int Shader_GetUniformLocation (Shader_t* pShader, const char* pUniformName);
+int GetAttribLocation (Shader_t* this, const char* pAttribName);
+int GetUniformLocation (Shader_t* this, const char* pUniformName);
+void SetSampler2D (const Shader_t* this, const char* name, i32 value);
 
 void
 Shader_Delete (Shader_t* pShader);

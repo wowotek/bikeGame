@@ -9,5 +9,8 @@ out vec2 fragTexcoord;
 void main(void)
 {
     fragTexcoord = inTexcoord;
-    gl_Position = vec4(inPosition, -0.5, 1.0);
+
+    vec2 position = vec2(inPosition.x, -inPosition.y);
+
+    gl_Position = vec4(position, -0.5, 1.0);
 }

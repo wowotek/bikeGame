@@ -1,8 +1,9 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include <common.h>
-#include <image.h>
+#include "common.h"
+#include "image.h"
+#include "shader.h"
 
 typedef u32 Wrapping, Filtering;
 
@@ -21,15 +22,17 @@ typedef struct
     Filtering filterMin, filterMag;
 } Sampler;
 
-typedef struct Texture Texture;
+typedef struct Texture2D Texture2D;
 
-Texture*
-new_texture (Image, Sampler);
-
-void
-bind_texture (Texture*, u32 index);
+Texture2D *
+NewTexture2D (Image, Sampler);
 
 void
-destroy_texture (Texture*);
+BindTexture2D (Texture2D* this, u32 index);
+
+void
+Delete_Texture (Texture2D* this);
+
+i32 GetTextureID(const Texture2D* this);
 
 #endif // TEXTURE_H

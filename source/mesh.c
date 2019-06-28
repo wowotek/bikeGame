@@ -24,8 +24,8 @@ New_Mesh (const Shader_t* pShader, const Vertex_t* pVertices, size_t vertexCount
         glBindBuffer(GL_ARRAY_BUFFER, pMesh->vbo);
         glBufferData(GL_ARRAY_BUFFER, vertexCount * sizeof(Vertex_t), pVertices, GL_STATIC_DRAW);
 
-        unsigned int posLocation = Shader_GetAttribLocation(pShader, "inPosition");
-        unsigned int uvLocation = Shader_GetAttribLocation(pShader, "inTexcoord");
+        unsigned int posLocation = GetAttribLocation(pShader, "inPosition");
+        unsigned int uvLocation = GetAttribLocation(pShader, "inTexcoord");
 
         GLsizei stride = sizeof(Vertex_t);
         glEnableVertexAttribArray(posLocation);

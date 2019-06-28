@@ -10,18 +10,18 @@ Wrapping CLAMP_TO_EDGE   = GL_CLAMP_TO_EDGE,
 Filtering NEAREST = GL_NEAREST,
           LINEAR  = GL_LINEAR;
 
-struct Texture
+struct Texture2D
 {
     GLuint id;  
 };
 
-Texture*
-new_texture (Image image, Sampler sampler)
+Texture2D *
+New_Texture (Image image, Sampler sampler)
 {
-    Texture *this = calloc(1, sizeof(Texture));
+    Texture2D *pTexture = New(Texture2D);
 
-    glGenTextures(1, &this->id);
-    glBindTexture(GL_TEXTURE_2D, this->id);
+    glGenTextures(1, &pTexture->id);
+    glBindTexture(GL_TEXTURE_2D, pTexture->id);
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.width, image.height, 0, image.format, GL_UNSIGNED_BYTE, image.pixels);
 
@@ -32,20 +32,24 @@ new_texture (Image image, Sampler sampler)
 
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    printf("%d\n", this->id);
-    return this;
+    return pTexture;
 }
 
 void
-bind_texture (Texture *this, u32 index)
+BindTexture2D (Texture2D *this, u32 index)
 {
     glBindTexture(GL_TEXTURE_2D, this->id);
     glActiveTexture(GL_TEXTURE0 + index);
 }
 
 void
-destroy_texture (Texture *this)
+Delete_Texture (Texture2D *this)
 {
     glDeleteTextures(1, &this->id);
     free(this);
+}
+
+i32 GetTextureID(const Texture2D* this)
+{
+    return this->id;
 }
