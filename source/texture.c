@@ -16,7 +16,7 @@ struct Texture2D
 };
 
 Texture2D *
-New_Texture (Image image, Sampler sampler)
+NewTexture2D (Image image, Sampler sampler)
 {
     Texture2D *pTexture = New(Texture2D);
 
@@ -43,7 +43,7 @@ BindTexture2D (Texture2D *this, u32 index)
 }
 
 void
-Delete_Texture (Texture2D *this)
+DeleteTexture2D (Texture2D *this)
 {
     glDeleteTextures(1, &this->id);
     free(this);

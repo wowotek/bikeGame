@@ -134,7 +134,7 @@ int main(void)
     defaultSampler.filterMin = NEAREST;
     defaultSampler.filterMag = NEAREST;
 
-    Texture2D* pPoliceCarTexture = New_Texture(policeCarImage, defaultSampler);
+    Texture2D* pPoliceCarTexture = NewTexture2D(policeCarImage, defaultSampler);
 
     while (!glfwWindowShouldClose(pWindow))
     {
@@ -145,6 +145,7 @@ int main(void)
         Shader_Bind(pTexturedQuadShader);
 
         BindTexture2D(pPoliceCarTexture, 0);
+        LOG_INFO("Hi!");
         SetSampler2D(pTexturedQuadShader, "iColorTexture", 0);
 
         Mesh_Draw(pQuadMesh);

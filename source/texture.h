@@ -31,7 +31,7 @@ void
 BindTexture2D (Texture2D* this, u32 index);
 
 void
-Delete_Texture (Texture2D* this);
+DeleteTexture2D (Texture2D* this);
 
 i32 GetTextureID(const Texture2D* this);
 
