@@ -1,4 +1,4 @@
-#include "mesh.h"
+#include <mesh.h>
 
 #include <glad/glad.h>
 #include <stddef.h>

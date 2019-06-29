@@ -1,7 +1,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include "common.h"
+#include <common.h>
 
 typedef struct Shader Shader_t;
 typedef struct ShaderStage ShaderStage_t;

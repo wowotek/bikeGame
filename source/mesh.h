@@ -1,8 +1,8 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include "common.h"
-#include "shader.h"
+#include <common.h>
+#include <shader.h>
 
 typedef struct Vertex
 {
