@@ -1,6 +1,5 @@
 #include <math.h>
-#include "animation.h"
-#include "common.h"
+#include <animation.h>
 
 Animation_t
 AnimationFromFiles (const char *pName, float duration, u8 frameCount, const char** ppFramesFiles, Sampler2D sampler)

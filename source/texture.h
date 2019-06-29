@@ -1,9 +1,9 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include "common.h"
-#include "image.h"
-#include "shader.h"
+#include <common.h>
+#include <image.h>
+#include <shader.h>
 
 typedef u32 Wrapping, Filtering;
 

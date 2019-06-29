@@ -1,14 +1,15 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "texture.h"
+#include <texture.h>
+#include <common.h>
 
 typedef
 struct Animation
 {
     const char *pName;
     Texture2D_t **ppFrames;
-    uint8_t frameCount;
+    u8 frameCount;
     float duration;
 } Animation_t;
 
@@ -22,9 +23,9 @@ struct Sprite
 Sprite_t;
 
 Animation_t
-AnimationFromFiles (const char *pName, float duration, uint8_t frameCount, const char** ppFramesFiles, Sampler2D sampler);
+AnimationFromFiles (const char *pName, float duration, u8 frameCount, const char** ppFramesFiles, Sampler2D sampler);
 
-uint8_t GetCurrentAnimationIndex (Animation_t anim, float time);
+u8 GetCurrentAnimationIndex (Animation_t anim, float time);
 Texture2D_t *GetCurrentAnimationFrame (Animation_t anim, float time);
 
 void

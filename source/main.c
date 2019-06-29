@@ -1,9 +1,9 @@
-#include "common.h"
-#include "image.h"
-#include "texture.h"
-#include "shader.h"
-#include "mesh.h"
-#include "animation.h"
+#include <common.h>
+#include <image.h>
+#include <texture.h>
+#include <shader.h>
+#include <mesh.h>
+#include <animation.h>
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
