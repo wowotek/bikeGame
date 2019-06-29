@@ -1,8 +1,9 @@
 #include <math.h>
 #include "animation.h"
+#include "common.h"
 
 Animation_t
-AnimationFromFiles (const char *pName, float duration, uint8_t frameCount, const char** ppFramesFiles, Sampler2D sampler)
+AnimationFromFiles (const char *pName, float duration, u8 frameCount, const char** ppFramesFiles, Sampler2D sampler)
 {
     Animation_t anim;
     anim.frameCount = frameCount;
@@ -12,7 +13,7 @@ AnimationFromFiles (const char *pName, float duration, uint8_t frameCount, const
     strcpy(anim.pName, pName);
     anim.ppFrames = malloc(sizeof(Texture2D_t*) * frameCount);
 
-    for (uint8_t i = 0; i < frameCount; ++i)
+    for (u8 i = 0; i < frameCount; ++i)
     {
         Image image = ImageFromFile(ppFramesFiles[i]);
         anim.ppFrames[i] = NewTexture2D(image, sampler);
@@ -22,9 +23,9 @@ AnimationFromFiles (const char *pName, float duration, uint8_t frameCount, const
     return anim;
 }
 
-uint8_t GetCurrentAnimationIndex (Animation_t anim, float time)
+u8 GetCurrentAnimationIndex (Animation_t anim, float time)
 {
-    return (uint8_t) (fmodf(time, anim.duration) / anim.duration * anim.frameCount);
+    return (u8) (fmodf(time, anim.duration) / anim.duration * anim.frameCount);
 }
 
 Texture2D_t *GetCurrentAnimationFrame(Animation_t anim, float time)
@@ -35,7 +36,7 @@ Texture2D_t *GetCurrentAnimationFrame(Animation_t anim, float time)
 void
 DestroyAnimation (Animation_t anim)
 {
-    for (uint8_t i = 0; i < anim.frameCount; ++i)
+    for (u8 i = 0; i < anim.frameCount; ++i)
     {
         DeleteTexture2D(anim.ppFrames[i]);
     }
