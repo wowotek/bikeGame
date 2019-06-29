@@ -208,7 +208,7 @@ void Initialize (void)
 
 #define min(x, a) ((x) < (a) ? (x) : (a))
 #define max(x, a) ((x) > (a) ? (x) : (a))
-
+#define clamp(x, a, b) ( ((x) < (a)) ? (a) : ( ((x) > (b)) ? (b) : (x)))
 
 void DrawEntity (Entity_t *pEntity, Camera2D_t *pCamera, float time)
 {
@@ -253,11 +253,9 @@ void UpdateVehicle (Vehicle_t *pVehicle, Material_t *pGroundMaterial, float dt)
     UpdateMotion2D(&pVehicle->base.motion, dt);
 }
 
-#define CLAMP(x, a, b) ( ((x) < (a)) ? (a) : ( ((x) > (b)) ? (b) : (x)))
-
 void AccelerateVehicle (Vehicle_t *pVehicle, float a)
 {
-    a = CLAMP(a, 0.0f, 1.0f);
+    a = clamp(a, 0.0f, 1.0f);
     Motion2D_AddForce(&pVehicle->base.motion, vec2(0, a * pVehicle->speed));
 }
 
