@@ -21,12 +21,12 @@ typedef struct
 Image;
 
 Image
-Image_From_File (const char* path);
+ImageFromFile (const char* path);
 
 Image
 Image_From_Memory (u8* memory, size_t size);
 
 void
-Delete_Image (Image image);
+DestroyImage (Image image);
 
 #endif // IMAGE_H

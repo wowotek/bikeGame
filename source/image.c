@@ -11,7 +11,7 @@ ImageFormat IMAGE_FORMAT_RED  = GL_RED,
             IMAGE_FORMAT_RGBA = GL_RGBA;
 
 Image
-Image_From_File (const char* path)
+ImageFromFile (const char* path)
 {
     Image image = { 0 };
     int comp = 4;
@@ -42,7 +42,7 @@ Image_From_Memory (u8* memory, size_t size)
 } 
 
 void
-Delete_Image (Image image)
+DestroyImage (Image image)
 {
     stbi_image_free(image.pixels);
 }

@@ -7,7 +7,7 @@ uniform sampler2D iColorTexture;
 
 out vec4 outColor;
 
-void main(void)
+void main (void)
 {
     outColor = texture(iColorTexture, fragTexcoord);
 }

@@ -12,7 +12,7 @@ struct Mesh
 
 
 Mesh_t *
-New_Mesh (const Shader_t* pShader, const Vertex_t* pVertices, size_t vertexCount, const u32* pIndices, size_t indexCount)
+New_Mesh (const Vertex_t* pVertices, size_t vertexCount, const u32* pIndices, size_t indexCount)
 {
     Mesh_t* pMesh = New(Mesh_t);
     
@@ -24,14 +24,11 @@ New_Mesh (const Shader_t* pShader, const Vertex_t* pVertices, size_t vertexCount
         glBindBuffer(GL_ARRAY_BUFFER, pMesh->vbo);
         glBufferData(GL_ARRAY_BUFFER, vertexCount * sizeof(Vertex_t), pVertices, GL_STATIC_DRAW);
 
-        unsigned int posLocation = GetAttribLocation(pShader, "inPosition");
-        unsigned int uvLocation = GetAttribLocation(pShader, "inTexcoord");
-
         GLsizei stride = sizeof(Vertex_t);
-        glEnableVertexAttribArray(posLocation);
-        glEnableVertexAttribArray(uvLocation);
-        glVertexAttribPointer(posLocation, 2, GL_FLOAT, GL_FALSE, stride, (const void*)0);
-        glVertexAttribPointer(uvLocation, 2, GL_FLOAT, GL_FALSE, stride, (const void*)offsetof(Vertex_t, texcoord));
+        glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, stride, (const void*)0);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, stride, (const void*)offsetof(Vertex_t, texcoord));
     }
 
     //pMesh->isIndexed = false;

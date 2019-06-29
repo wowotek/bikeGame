@@ -15,10 +15,10 @@ struct Texture2D
     GLuint id;  
 };
 
-Texture2D *
-NewTexture2D (Image image, Sampler sampler)
+Texture2D_t *
+NewTexture2D (Image image, Sampler2D sampler)
 {
-    Texture2D *pTexture = New(Texture2D);
+    Texture2D_t *pTexture = New(Texture2D_t);
 
     glGenTextures(1, &pTexture->id);
     glBindTexture(GL_TEXTURE_2D, pTexture->id);
@@ -36,20 +36,20 @@ NewTexture2D (Image image, Sampler sampler)
 }
 
 void
-BindTexture2D (Texture2D *this, u32 index)
+BindTexture2D (const Texture2D_t* this, u32 index)
 {
     glBindTexture(GL_TEXTURE_2D, this->id);
     glActiveTexture(GL_TEXTURE0 + index);
 }
 
 void
-DeleteTexture2D (Texture2D *this)
+DeleteTexture2D (const Texture2D_t *this)
 {
     glDeleteTextures(1, &this->id);
     free(this);
 }
 
-i32 GetTextureID(const Texture2D* this)
+i32 GetTexture2D (const Texture2D_t* this)
 {
     return this->id;
 }

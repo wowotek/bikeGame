@@ -135,3 +135,18 @@ void SetSampler2D (const Shader_t* this, const char* name, i32 value)
 {
     glUniform1i(GetUniformLocation(this, name), value);
 }
+
+void SetUniformFloat (Shader_t *this, const char *name, float value)
+{
+    glUniform1f(glGetUniformLocation(this->id, name), value);
+}
+
+void SetUniformVec2 (Shader_t *this, const char *name, vec2 value)
+{
+    glUniform2f(glGetUniformLocation(this->id, name), value.x, value.y);
+}
+
+void SetUniformVec4 (Shader_t *this, const char *name, vec4 value)
+{
+    glUniform4f(glGetUniformLocation(this->id, name), value.x, value.y, value.z, value.w);
+}
